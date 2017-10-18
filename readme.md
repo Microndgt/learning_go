@@ -1,3 +1,31 @@
+Introduction
+===
+
+记录学习golang出现的问题，感悟，笔记和总结。From 2017-10-17
+
+- go版本`go version go1.9.1 darwin/amd64`
+- 编辑器使用VSCode
+- 调试器使用[Delve调试器](https://github.com/derekparker/delve)
+
+项目结构
+===
+
+- [main.go](https://github.com/Microndgt/learning_go/blob/master/main.go): go语言基础
+
+环境问题
+===
+
+设置GOPATH
+---
+
+在`.bash_profile`中加入：
+
+```
+export GOPATH=/Users/kevin/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+```
+
 MAC中安装Delve调试器
 ---
 
@@ -55,3 +83,31 @@ Process exiting with code: 1
 ---
 
 `go run main.go`
+
+VSCode快捷键
+----
+
+- `command + p` 快速打开文件
+- `shift + command + p` 命令面板 或者 F1
+- `command + w` 关闭窗口
+- `shift + command + n` 新建窗口
+
+- `command + [ 或者 ]` 缩进
+- `alt + 下 或者 上` 移动当前行往下 或者 上
+- `shift + alt + 下 或者 上` 移动当前行往下 或者 上
+- `shift + command + k` 删除当前行
+
+论坛和资源
+===
+
+- [Go语言中文网](https://studygolang.com/)
+
+算法
+===
+
+用Go刷[Leetcode](https://leetcode.com/micron/)算法题
+
+应用
+===
+
+用来学习Go语言的小应用
