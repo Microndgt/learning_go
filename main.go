@@ -3,6 +3,7 @@ package main
 // package main表示一个可独立执行的程序，每个 Go 应用程序都包含一个名为 main 的包。
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
@@ -194,7 +195,7 @@ func main(){
 	var balance_0 = [5]float32{1000}
 	fmt.Println(balance_0)
 	// 可以根据元素个数设置数组大小,这个数组大小为1
-	var balance_1 = [...]float32{1000}
+	var balance_1 = []float32{1000}
 	fmt.Println(len(balance_1))
 
 	// 多维数组
@@ -222,7 +223,231 @@ func main(){
 	// 值为nil，比较的话 ptr != nil
 	var ptr_nil *int
 	fmt.Println(ptr_nil)
+
+	const MAX int = 3
+	// 整形指针数组，也就是数组每一个元素的类型都是整形指针
+	var ptr_array [MAX] *int
+	var i int
+	for i = 0; i < MAX; i++ {
+		ptr_array[i] = &i
+	}
+	for i = 0; i < MAX; i++ {
+		fmt.Println(i, *ptr_array[i])
+	}
+
+	// 指针作为函数参数
+	// 允许向函数传递指针，只需要在函数定义的参数上设置为指针类型即可。
+	// 也就是下面的swap_ptr函数
+
+	var Book1 Books
+	Book1.author = "kevin"
+	Book1.subject = "math"
+	Book1.title = "Python"
+	fmt.Println(Book1)
+
+	// 结构体作为函数参数
+	printBook(Book1)
+
+	// 结构体指针
+	var struct_pointer *Books
+	struct_pointer = &Book1
+	fmt.Println(struct_pointer.author)
+	printBook_ptr(struct_pointer)
+
+	// 切片
+	// 即动态数组，切片长度不固定，可以追加元素
+	// 这里赋值了一个没有设置长度的数组
+	var slice_1 []int = []int{1, 2, 3}
+	// 或者使用make来创建切片
+	// 第二个参数是length, 第三个是capacity
+	var slice_2 = make([]int, 5, 10)
+	fmt.Println(slice_1)
+	fmt.Println(slice_2)
+
+	// cap()可以测量切片最长可以到达多少
+	fmt.Println(cap(slice_1)) // 3
+	fmt.Println(cap(slice_2)) // 10
+
+	// nil空切片，只声明但是没有初始化前默认是nil([])，长度是0
+	var slice_3 []int
+	fmt.Println(slice_3)
+	fmt.Println(cap(slice_3), len(slice_3)) // 0, 0
+
+	// append()函数向切片追加新元素,变态的使用方法
+	// 比起Python一点都不优雅啊
+	slice_3 = append(slice_3, 5)
+	slice_3 = append(slice_3, 1, 2, 3)
+	fmt.Println(slice_3)
+	fmt.Println(cap(slice_3), len(slice_3)) // 4, 4
+
+	var slice_4 []int = make([]int, len(slice_3) * 2, cap(slice_3) * 2)
+	copy(slice_4, slice_3)	
+	fmt.Println(slice_4) // [5 1 2 3 0 0 0 0]
+	fmt.Println(cap(slice_4), len(slice_4)) // 8, 8
 	
+	// range 范围，用于迭代数组，切片，通道和集合的元素
+	// 数组和切片中返回元素的索引值，集合中返回key-value对的key值
+	var sum int = 0
+	for _, num := range slice_4{
+		sum += num
+	}
+	fmt.Println(sum)
+	
+	for i, x := range "love"{
+		fmt.Println("index:", i, "ele:", x)
+	}
+
+	// map集合
+	// 第一个是key的类型，第二个是值的类型
+	// 必须先声明，然后再用make初始化
+	var countryCapitalMap map[string]string	
+	countryCapitalMap = make(map[string]string)
+	fmt.Println(countryCapitalMap)
+	countryCapitalMap["France"] = "Paris"
+	countryCapitalMap["China"] = "Beijing"
+
+	for country := range countryCapitalMap{
+		fmt.Println("country:", country)
+	}
+
+	fmt.Println(countryCapitalMap["France"])
+
+	// 判断key是否存在, ok是ture或者false
+	capital, ok := countryCapitalMap["united states"]
+	if ok {
+		fmt.Println("united states is in", capital)
+	}else{
+		fmt.Println("united states is not in", capital)
+	}
+
+	// 另一种初始化方法
+	countryCapitalMap_2 := map[string]string {"France":"Paris","Italy":"Rome","Japan":"Tokyo","India":"New Delhi"}
+	fmt.Println(countryCapitalMap_2)
+
+	delete(countryCapitalMap_2, "France")
+
+	for country := range countryCapitalMap_2{
+		fmt.Println(country, countryCapitalMap_2[country])
+	}
+
+	// 递归调用
+	fmt.Println(fibonacci(10))
+
+	// 接口
+	var phone Phone
+
+	phone = new(NokiaPhone)
+	phone.call()
+
+	phone = new(IPhone)
+	phone.call()
+
+	// 错误处理
+	// 通过实现 error 接口类型来生成错误信息
+	fmt.Println(Sqrt(-1))
+	fmt.Println(Sqrt(2))
+
+	if result, errorMsg := Divide(100, 10); errorMsg == "" {
+        fmt.Println("100/10 = ", result)
+    }
+    // 当被除数为零的时候会返回错误信息
+    if _, errorMsg := Divide(100, 0); errorMsg != "" {
+        fmt.Println("errorMsg is: ", errorMsg)
+    }
+}
+
+func Sqrt(f float32) (float32, error){
+	if f < 0{
+		return 0, errors.New("math: square root of negative number")
+	}
+	return 1, nil
+}
+
+// 自定义一个error结构，并且实现error接口 Error()方法
+type DivideError struct{
+	dividee int
+	divider int
+}
+
+// 实现接口Error()方法，是DivideError的
+func (de DivideError) Error() string{
+	strFormat := `
+	Cannot proceed, the divider is zero
+	dividee: %d
+	divider: 0`
+	return fmt.Sprintf(strFormat, de.dividee)
+}
+
+func Divide(varDividee int, varDivider int) (result int, errorMsg string) {
+    if varDivider == 0 {
+        dData := DivideError{
+            dividee: varDividee,
+            divider: varDivider,
+        }
+        errorMsg = dData.Error()
+        return
+    } else {
+        return varDividee / varDivider, ""
+    }
+
+}
+
+// 接口
+// 把所有的具有共性的方法定义在一起，任何其他类型只要实现了这些方法就是实现了这个接口。
+
+// 这个Phone接口定义了call方法
+// 因此后面的只要实现了这个方法，就是实现了这个Phone接口
+type Phone interface{
+	call()
+}
+
+type NokiaPhone struct{
+
+}
+func (nokiaPhone NokiaPhone) call(){
+	fmt.Println("I am Nokia, I can call you")
+}
+
+type IPhone struct{
+
+}
+func (iphone IPhone) call(){
+	fmt.Println("I'm IPhone, I can call you")
+}
+
+
+func fibonacci(n int) []int{
+	var a, b int = 0, 1
+	var res []int
+	res = append(res, 0)
+	for i := 0; i < n; i++{
+		a, b = a+b, a
+		fmt.Println(a)
+		res = append(res, a)
+	}
+	return res
+}
+
+// 结构体
+// 在结构体中我们可以为不同项定义不同的数据类型。
+// type设定了结构体的名称，struct定义一个新的数据类型
+type Books struct{
+	title string
+	author string
+	subject string
+	book_id int
+}
+
+// 传递结构体指针
+func printBook_ptr(book *Books){
+	fmt.Println(book.author)
+}
+
+func printBook(book Books){
+	fmt.Println(book.author)
+	fmt.Println(book.title)
+	fmt.Println(book.subject)
+	fmt.Println(book.book_id)
 }
 
 // 定义结构体类型
