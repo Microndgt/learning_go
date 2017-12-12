@@ -10,7 +10,8 @@ Introduction
 项目结构
 ===
 
-- [main.go](https://github.com/Microndgt/learning_go/blob/master/main.go): go语言基础
+- [basic/main.go](https://github.com/Microndgt/learning_go/blob/master/basic/main.go): go语言基础
+- [use_gin/main.go](https://github.com/Microndgt/learning_go/blob/master/use_gin/main.go): gin框架学习
 
 环境问题
 ===
@@ -79,6 +80,17 @@ Process exiting with code: 1
 
 到此就可以正常调试啦！
 
+安装go tools
+---
+
+直接运行`go get -u golang.org/x/tools`会报以下错误：
+
+```
+package golang.org/x/tools: unrecognized import path "golang.org/x/tools" (https fetch: Get https://golang.org/x/tools?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
+```
+
+可以用github，`go get github.com/golang/tools`，这个会保存在`go/src/github.com/golang/tools`，然后将其复制到`go/src/golang.org/x/tools`即可
+
 运行
 ---
 
@@ -91,11 +103,17 @@ VSCode快捷键
 - `shift + command + p` 命令面板 或者 F1
 - `command + w` 关闭窗口
 - `shift + command + n` 新建窗口
-
 - `command + [ 或者 ]` 缩进
 - `alt + 下 或者 上` 移动当前行往下 或者 上
-- `shift + alt + 下 或者 上` 移动当前行往下 或者 上
+- `shift + alt + 下 或者 上` 复制当前行往下 或者 上
 - `shift + command + k` 删除当前行
+- `shift + command + y` 打开调试控制台
+- `shift + command + c` 打开终端
+
+在VSCode中使用VIM
+---
+
+打开命令面板，然后输入ext，然后在扩展中搜索vim，安装后，重新加载就可以使用vim了。vim和vscode结合会不会出现效率高峰呢？可惜我的vim命令已经忘了差不多了。
 
 论坛和资源
 ===
@@ -103,7 +121,8 @@ VSCode快捷键
 - [Go 语言教程](http://www.runoob.com/go/go-tutorial.html)
 - [Go语言中文网](https://studygolang.com/)
 - [gowebapp](https://github.com/Microndgt/gowebapp) 一个简单的项目，正在学习中
-- [iris](https://github.com/kataras/iris) 自称地球上最快go web框架
+- [iris](https://github.com/kataras/iris) 自称宇宙上最快go web框架
+- [gin](https://github.com/kataras/iris) 性能好的go web框架
 
 算法
 ===
