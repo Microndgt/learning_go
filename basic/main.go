@@ -139,6 +139,16 @@ func main(){
 		fmt.Println(loop_a)
 	}
 
+	JLoop: for j := 0; j < 5; j++{
+		for i := 0; i < 10; i++{
+			if i > 5{
+				break JLoop
+			}
+		fmt.Println(i)
+		}
+	}
+	
+
 	// goto语句
 	// goto语句需要对要跳转的语句进行标记
 	var goto_a = 10

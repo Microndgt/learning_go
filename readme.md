@@ -11,6 +11,7 @@ Introduction
 ===
 
 - [basic/main.go](https://github.com/Microndgt/learning_go/blob/master/basic/main.go): go语言基础
+- [basic_next/basic_next.go](https://github.com/Microndgt/learning_go/blob/master/basic_next/basic_next.go): go语言基础第二
 - [use_gin/main.go](https://github.com/Microndgt/learning_go/blob/master/use_gin/main.go): gin框架学习
 
 环境问题
