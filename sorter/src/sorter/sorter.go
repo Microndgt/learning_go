@@ -7,6 +7,9 @@ import (
 	"os"
 	"flag"
 	"fmt"
+	"time"
+	"algorithms/quicksort"
+	"algorithms/bubblesort"
 )
 
 // 名字，默认值，使用方法
@@ -91,18 +94,30 @@ func main(){
 
 	// 读取数据
 	values, err := read_values(*infile)
-	if err != nil{
+	if err == nil{
 		fmt.Println("read values: ", values)
+		t1 := time.Now()
+		switch *algorithm{
+		case "qsort":
+			quicksort.QuickSort2(values)
+		case "bubblesort":
+			bubblesort.BubbleSort(values)
+		default:
+			fmt.Println("sorting algorithm", *algorithm, "is either unknown or unsupported")
+		}
+		t2 := time.Now()
+		fmt.Println("sorted values:", values)
+		fmt.Println("the sorting process costs", t2.Sub(t1), "to complete")
+		// 写入数据
+		err = write_values(values, *outfile)
+		if err != nil{
+			fmt.Println("write file failed ", err)
+		} else {
+			fmt.Println("write success")
+		}
 	} else {
 		fmt.Println(err)
 	}
 
-	// 写入数据
-	err = write_values(values, *outfile)
-	if err != nil{
-		fmt.Println("write file failed ", err)
-	} else {
-		fmt.Println("write success")
-	}
-
+	
 }

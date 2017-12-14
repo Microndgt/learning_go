@@ -11,7 +11,11 @@ Introduction
 ===
 
 - [basic/main.go](https://github.com/Microndgt/learning_go/blob/master/basic/main.go): go语言基础
-- [basic_next/basic_next.go](https://github.com/Microndgt/learning_go/blob/master/basic_next/basic_next.go): go语言基础第二
+- [basic_next/basic_next.go](https://github.com/Microndgt/learning_go/blob/master/basic_next/main_next.go): go语言基础第二
+- [sorter](https://github.com/Microndgt/learning_go/blob/master/sorter/sorter.go): 一个排序的小工具(来自`go语言编程`一书)
+
+    将sorter目录加入GOPATH，就可以进行编译，测试和运行了。
+
 - [use_gin/main.go](https://github.com/Microndgt/learning_go/blob/master/use_gin/main.go): gin框架学习
 
 环境问题
@@ -116,6 +120,11 @@ VSCode快捷键
 
 打开命令面板，然后输入ext，然后在扩展中搜索vim，安装后，重新加载就可以使用vim了。vim和vscode结合会不会出现效率高峰呢？可惜我的vim命令已经忘了差不多了。
 
+书
+===
+
+- `go语言编程`
+
 论坛和资源
 ===
 
@@ -124,6 +133,7 @@ VSCode快捷键
 - [gowebapp](https://github.com/Microndgt/gowebapp) 一个简单的项目，正在学习中
 - [iris](https://github.com/kataras/iris) 自称宇宙上最快go web框架
 - [gin](https://github.com/kataras/iris) 性能好的go web框架
+- [go语言的知识图谱](http://lib.csdn.net/base/go/structure)
 
 算法
 ===
