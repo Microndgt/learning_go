@@ -104,16 +104,7 @@ package golang.org/x/tools: unrecognized import path "golang.org/x/tools" (https
 VSCode快捷键
 ----
 
-- `command + p` 快速打开文件
-- `shift + command + p` 命令面板 或者 F1
-- `command + w` 关闭窗口
-- `shift + command + n` 新建窗口
-- `command + [ 或者 ]` 缩进
-- `alt + 下 或者 上` 移动当前行往下 或者 上
-- `shift + alt + 下 或者 上` 复制当前行往下 或者 上
-- `shift + command + k` 删除当前行
-- `shift + command + y` 打开调试控制台
-- `shift + command + c` 打开终端
+[VSCode快捷键](http://skyrover.me/2017/12/15/shortcut/)
 
 在VSCode中使用VIM
 ---
