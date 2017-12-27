@@ -32,6 +32,37 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 ```
 
+安装go语言周边工具
+---
+
+```
+gocode: go get -u -v github.com/nsf/gocode
+godef: go get -u -v github.com/rogpeppe/godef
+gogetdoc: go get -u -v github.com/zmb3/gogetdoc
+golint: go get -u -v github.com/golang/lint/golint
+go-outline: go get -u -v github.com/lukehoban/go-outline
+goreturns: go get -u -v sourcegraph.com/sqs/goreturns
+gorename: go get -u -v golang.org/x/tools/cmd/gorename
+gopkgs: go get -u -v github.com/tpng/gopkgs
+go-symbols: go get -u -v github.com/newhook/go-symbols
+guru: go get -u -v golang.org/x/tools/cmd/guru
+gotests: go get -u -v github.com/cweill/gotests/...
+```
+
+使用[govendor](https://github.com/kardianos/govendor) 来管理vendor:
+
+```
+# Setup your project.
+cd "my project in GOPATH"
+govendor init
+
+# Add existing GOPATH files to vendor.
+govendor add +external
+
+# View your work.
+govendor list
+```
+
 MAC中安装Delve调试器
 ---
 
